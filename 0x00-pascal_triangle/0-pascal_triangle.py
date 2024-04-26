@@ -1,27 +1,21 @@
 #!/usr/bin/python3
-""
-Returns a list of lists of integers representing the Pascal’s triangle of n
-""
+''' A module for 0x00. Pascal's Triangle. '''
 
 
 def pascal_triangle(n):
-    
-    if n <= 0:
-        # Return an empty list if n is not positive
-        return []
+    '''returns a list of lists of integers
+    representing the Pascal's triangle of n
+    '''
+    pascal_list = []
+    if type(n) is not int or n <= 0:
+        return pascal_list
 
-    # Initialize the triangle with the first row
-    triangle = [[1]]
-
-    for i in range(1, n):
-        # Start a new row with the first element 1
-        row = [1]
-        for j in range(1, i):
-            # Each element is the sum of the two elements above it
-            # from the previous row
-            row.append(triangle[i-1][j-1] + triangle[i-1][j])
-        # End the row with the last element 1
-        row.append(1)
-        triangle.append(row)
-
-    return (triangle)
+    for i in range(n):
+        line = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                line.append(1)
+            elif i > 0 and j > 0:
+                line.append(pascal_list[i - 1][j - 1] + pascal_list[i - 1][j])
+        pascal_list.append(line)
+    return pascal_list
